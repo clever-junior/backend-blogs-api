@@ -25,6 +25,15 @@ module.exports = {
       return error;
     }
   },
+  async getById(id) {
+    try {
+      const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+
+      return user;
+    } catch (error) {
+      return error;
+    }
+  },
   async getByEmail(email) {
     try {
       const user = await User.findOne({ where: { email } });
