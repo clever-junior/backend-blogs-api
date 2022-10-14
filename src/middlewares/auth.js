@@ -1,8 +1,8 @@
 require('dotenv').config();
 
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-// const { JWT_SECRET: secret } = process.env;
+const { JWT_SECRET: SECRET } = process.env;
 
 const { loginSchema: schema } = require('../validations/userSchemas');
 
@@ -21,6 +21,21 @@ module.exports = {
       next();
     } catch (error) {
       return res.status(500).json({ error });
+    }
+  },
+  async validateToken(req, res, next) {
+    const token = req.headers.authorization;
+
+    if (!token) return res.status(401).json({ message: 'Token not found' });
+
+    try {
+      return jwt.verify(token, SECRET, (error) => {
+        if (error) return res.status(401).json({ message: 'Expired or invalid token' });
+
+        next();
+      });
+    } catch (error) {
+      return res.status(401).json({ error });
     }
   },
 };

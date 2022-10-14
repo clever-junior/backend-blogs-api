@@ -10,6 +10,8 @@ const userMiddlewares = require('../middlewares/userMiddlewares');
 
 router.post('/login', authMiddlewares.authentication, controller.login);
 
+router.get('/user', authMiddlewares.validateToken, controller.index);
+
 router.post('/user', userMiddlewares.validation, controller.store);
 
 module.exports = router;

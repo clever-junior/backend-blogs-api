@@ -26,6 +26,17 @@ module.exports = {
       return res.status(500).json({ error });      
     }
   },
+  async index(_req, res) {
+    try {
+      const users = await service.getAll();
+
+      if (!users) return res.status(400).json({ message: 'Error' });
+
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
   async store(req, res) {
     try {
       const { displayName, email, password, image } = req.body;
