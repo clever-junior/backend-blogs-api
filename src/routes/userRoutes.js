@@ -4,10 +4,12 @@ const router = express.Router();
 
 const controller = require('../controllers/userController');
 
-const middlewares = require('../middlewares/auth');
+const authMiddlewares = require('../middlewares/auth');
 
-router.post('/login', middlewares.authentication, controller.login);
+const userMiddlewares = require('../middlewares/userMiddlewares');
 
-router.get('/user', (_req, res) => res.send('oloco'));
+router.post('/login', authMiddlewares.authentication, controller.login);
+
+router.post('/user', userMiddlewares.validation, controller.store);
 
 module.exports = router;

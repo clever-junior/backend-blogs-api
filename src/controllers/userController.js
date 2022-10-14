@@ -26,4 +26,21 @@ module.exports = {
       return res.status(500).json({ error });      
     }
   },
+  async store(req, res) {
+    try {
+      const { displayName, email, password, image } = req.body;
+
+      const user = { displayName, email, password, image };
+      
+      const { code, message } = await service.create(user);
+      
+      if (message) return res.status(code).json({ message });
+
+      const token = generateToken({});
+
+      return res.status(201).json({ token });
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
 };

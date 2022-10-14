@@ -4,7 +4,7 @@ require('dotenv').config();
 
 // const { JWT_SECRET: secret } = process.env;
 
-const schema = require('../validations/userSchemas');
+const { loginSchema: schema } = require('../validations/userSchemas');
 
 module.exports = {
   authentication(req, res, next) {
