@@ -16,4 +16,13 @@ module.exports = {
       return error;
     }
   },
+  async getAll() {
+    try {
+      const categories = await Category.findAll();
+
+      return categories;
+    } catch (error) {
+      return error;   
+    }
+  },
 };
