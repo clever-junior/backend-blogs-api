@@ -25,4 +25,13 @@ module.exports = {
       return error;   
     }
   },
+  async getById(pk) {
+    try {
+      const category = await Category.findByPk(pk);
+
+      return category;
+    } catch (error) {
+      return error;
+    }
+  },
 };

@@ -29,8 +29,10 @@ module.exports = {
     if (!token) return res.status(401).json({ message: 'Token not found' });
 
     try {
-      return jwt.verify(token, SECRET, (error) => {
+      return jwt.verify(token, SECRET, (error, decoded) => {
         if (error) return res.status(401).json({ message: 'Expired or invalid token' });
+
+        req.userId = decoded.id;
 
         next();
       });

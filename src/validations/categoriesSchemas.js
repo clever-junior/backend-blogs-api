@@ -1,8 +1,10 @@
 const Joi = require('joi');
 
-const cartegoriesSchema = Joi.object({
+const categoriesSchema = Joi.object({
   name: Joi.string()
     .required(),
 });
 
-module.exports = cartegoriesSchema;
+module.exports = {
+  categoriesSchema,
+};

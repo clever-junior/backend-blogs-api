@@ -18,7 +18,7 @@ module.exports = {
     try {
       const { name } = req.body;
       
-      const validation = schema.validate({ name });
+      const validation = schema.categoriesSchema.validate({ name });
 
       if (validation.error) {
         const { error: { details: [{ message }] } } = validation;

@@ -1,9 +1,13 @@
-// const { PostCategory, BlogPost } = require('../models');
+const { BlogPost } = require('../models');
 
 module.exports = {
-  async create({ title, content, categoryIds }) {
+  async create({ id: userId, title, content }) {
     try {
-      return { title, content, categoryIds };
+      const published = new Date();
+      const updated = new Date();
+      const result = await BlogPost.create({ title, content, userId, published, updated });
+      
+      return result;
     } catch (error) {
       return error;
     }

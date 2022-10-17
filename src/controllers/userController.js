@@ -13,13 +13,15 @@ const generateToken = (params = {}) => (
 module.exports = {
   async login(req, res) {
     try {
-      const { email, password } = req.body;
+      const { email } = req.body;
       
-      const { message } = await service.getByEmail(email);
+      const result = await service.getByEmail(email);
+
+      const { message } = result;
 
       if (message) return res.status(400).json({ message });
 
-      const token = generateToken({ email, password });
+      const token = generateToken({ id: result.id });
 
       return res.status(200).json({ token });
     } catch (error) {

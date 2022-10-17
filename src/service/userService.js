@@ -40,7 +40,7 @@ module.exports = {
 
       if (!user) return { message: 'Invalid fields' };
 
-      return {};
+      return user;
     } catch (error) {
       return error;
     }

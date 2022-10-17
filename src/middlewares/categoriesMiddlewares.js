@@ -1,11 +1,11 @@
-const schema = require('../validations/userSchemas');
+const schema = require('../validations/categoriesSchemas');
 
 module.exports = {
   async validate(req, res, next) {
     try {
       const { name } = req.body;
 
-      const validation = schema.validate({ name });
+      const validation = schema.categoriesSchema.validate({ name });
 
       if (validation.error) {
         const { error: { details: [{ message }] } } = validation;
