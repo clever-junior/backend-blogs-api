@@ -65,4 +65,21 @@ module.exports = {
       return error;
     }
   },
+  async update(req, res) {
+    try {
+      const { title, content } = req.body;
+      const { id } = req.params;
+      const { userId } = req;
+
+      const post = await service.getById(id);
+
+      if (post.userId !== userId) return res.status(401).json({ message: 'Unauthorized user' });
+
+      const result = await service.update({ title, content }, id);
+
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
 };

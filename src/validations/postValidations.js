@@ -23,4 +23,22 @@ const postSchema = Joi.object({
     }),
 });
 
-module.exports = postSchema;
+const postUpdateSchema = Joi.object({
+  title: Joi.string()
+    .required()
+    .messages({
+      'any.required': message,
+      'string.empty': message,
+    }),
+  content: Joi.string()
+  .required()
+  .messages({
+    'any.required': message,
+    'string.empty': message,
+  }),
+});
+
+module.exports = {
+  postSchema,
+  postUpdateSchema,
+};

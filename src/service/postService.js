@@ -31,6 +31,16 @@ module.exports = {
     });
     return result;
   },  
+  async getByUserId(userId) {
+    const result = await BlogPost.findOne({
+      where: { userId },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    return result;
+  },  
   async create({ id: userId, title, content }) {
     try {
       const published = new Date();
@@ -42,9 +52,15 @@ module.exports = {
       return error;
     }
   },
-  // async update(data, id) {
-  //   const post = await getById(id);
-  //   post.update(data);
-  //   return post;
-  // },
+  async update({ title, content }, id) {
+    const post = await BlogPost.findOne({ where: { id },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    post.update({ title, content });
+    post.save();
+    return post;
+  },
 };
