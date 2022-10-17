@@ -10,6 +10,8 @@ const userMiddlewares = require('../middlewares/userMiddlewares');
 
 router.post('/login', authMiddlewares.authentication, controller.login);
 
+router.delete('/user/me', authMiddlewares.validateToken, controller.delete);
+
 router.get('/user/:id', authMiddlewares.validateToken, controller.findById);
 
 router.get('/user', authMiddlewares.validateToken, controller.index);

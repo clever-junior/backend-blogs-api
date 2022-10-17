@@ -69,4 +69,15 @@ module.exports = {
       return res.status(500).json({ error });
     } 
   },
+  async delete(req, res) {
+    try {
+      const id = req.userId;
+
+      await service.delete(id);
+
+      return res.status(204).json({ message: 'Deleted Success' });
+    } catch (error) {
+      return error;
+    }
+  },
 };

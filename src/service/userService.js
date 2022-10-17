@@ -45,4 +45,11 @@ module.exports = {
       return error;
     }
   },
+  async delete(id) {
+    try {
+      await User.destroy({ where: { id } });
+    } catch (error) {
+      return error;
+    }
+  },
 };
