@@ -11,6 +11,8 @@ const postMiddlewares = require('../middlewares/postMiddlewares');
 router.put('/post/:id',
   authMiddlewares.validateToken, postMiddlewares.updateValidation, controller.update);
 
+router.delete('/post/:id', authMiddlewares.validateToken, controller.delete);
+
 router.get('/post/:id', authMiddlewares.validateToken, controller.getById);
 
 router.get('/post', authMiddlewares.validateToken, controller.index);

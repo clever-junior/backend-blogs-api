@@ -82,4 +82,22 @@ module.exports = {
       return res.status(500).json({ error });
     }
   },
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      const { userId } = req;
+
+      const post = await service.getById(id);
+      
+      if (!post) return res.status(404).json({ message: 'Post does not exist' });
+      
+      if (post.userId !== userId) return res.status(401).json({ message: 'Unauthorized user' });
+      
+      await service.delete(id);
+
+      return res.status(204).json({});
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
 };

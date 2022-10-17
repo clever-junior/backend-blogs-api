@@ -63,4 +63,9 @@ module.exports = {
     post.save();
     return post;
   },
+
+  async delete(id) {
+    const post = await BlogPost.destroy({ where: { id } });
+    return post;
+  },
 };
