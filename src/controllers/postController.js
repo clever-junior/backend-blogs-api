@@ -52,4 +52,17 @@ module.exports = {
       return res.status(500).json({ error });
     }
   },
+  async getById(req, res) {
+    try {
+      const { id } = req.params;
+      
+      const result = await service.getById(id);
+
+      if (!result) return res.status(404).json({ message: 'Post does not exist' });
+
+      return res.status(200).json(result);
+    } catch (error) {
+      return error;
+    }
+  },
 };

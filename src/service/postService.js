@@ -21,6 +21,16 @@ module.exports = {
       return error;
     }
   },
+  async getById(id) {
+    const result = await BlogPost.findOne({
+      where: { id },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    return result;
+  },  
   async create({ id: userId, title, content }) {
     try {
       const published = new Date();
@@ -32,4 +42,9 @@ module.exports = {
       return error;
     }
   },
+  // async update(data, id) {
+  //   const post = await getById(id);
+  //   post.update(data);
+  //   return post;
+  // },
 };
