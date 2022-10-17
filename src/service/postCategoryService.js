@@ -11,4 +11,22 @@ module.exports = {
       return error;
     }
   },
+  async findById(id) {
+    try {
+      const result = await PostCategory.findOne({ where: { postId: id } });
+
+      return result;
+    } catch (error) {
+      return error;
+    }
+  },
+  async getAll() {
+    try {
+      const result = await PostCategory.findAll();
+
+      return result;
+    } catch (error) {
+      return error;
+    }
+  },
 };

@@ -8,6 +8,8 @@ const authMiddlewares = require('../middlewares/auth');
 
 const postMiddlewares = require('../middlewares/postMiddlewares');
 
+router.get('/post', authMiddlewares.validateToken, controller.index);
+
 router.post('/post', 
   authMiddlewares.validateToken, postMiddlewares.validateFields, controller.store);
 

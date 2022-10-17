@@ -4,8 +4,6 @@ const categoriesService = require('../service/categoriesService');
 
 const postCategoryService = require('../service/postCategoryService');
 
-// const { validateCategories } = require('../validations/categoriesSchemas');
-
 const categoryIdsValidation = async (categoryIds) => {
   let validation = {};
 
@@ -22,6 +20,16 @@ const categoryIdsValidation = async (categoryIds) => {
 };
 
 module.exports = {
+  async index(_req, res) {
+    try {
+      const result = await service.getAll();
+
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
+
   async store(req, res) {
     try {
       const { title, content, categoryIds } = req.body;
